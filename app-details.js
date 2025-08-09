@@ -50,20 +50,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 // --- Function to display the fetched data in HTML ---
+// ******** YEH FUNCTION POORI TARAH SE UPDATE KIYA GAYA HAI ********
 function displayAppDetails(data) {
     const container = document.getElementById('app-detail-container');
     
-    // Check if apkUrl exists before creating the download button
-    const downloadButtonHTML = data.apkUrl 
+    // --- Download Button Logic ---
+    const downloadButtonHTML = data.apkUrl && data.apkUrl.trim() !== ''
         ? `<a href="${data.apkUrl}" class="download-button" target="_blank" rel="noopener noreferrer">Download APK</a>`
         : `<p class="no-download">Download link not available yet.</p>`;
 
+    // --- Category Logic ---
+    // Check karega ki category hai ya nahi, agar hai to hi dikhayega
+    const categoryHTML = data.category ? `<p class="app-detail-category">${data.category}</p>` : '';
+
+    // --- Screenshots Logic ---
+    // Check karega ki screenshots array hai ya nahi
+    const screenshotsHTML = (data.screenshots && data.screenshots.length > 0)
+        ? data.screenshots.map(url => `<img src="${url}" alt="App Screenshot">`).join('')
+        : '<p>No screenshots available.</p>';
+    
+    // --- Final HTML ---
     container.innerHTML = `
         <div class="app-detail-header">
             <img src="${data.iconUrl}" alt="${data.name} Icon" class="app-detail-icon">
             <div class="app-detail-title-group">
                 <h1>${data.name}</h1>
-                <p>${data.category}</p>
+                ${categoryHTML}
                 <span>By Ai Technocrafts</span>
             </div>
         </div>
@@ -72,13 +84,10 @@ function displayAppDetails(data) {
             ${downloadButtonHTML}
         </div>
 
-        <!-- Screenshots Section (We'll make this dynamic later) -->
         <div class="screenshots-gallery">
             <h2>Screenshots</h2>
             <div class="gallery">
-                <img src="https://via.placeholder.com/200x400.png?text=Screenshot+1" alt="Screenshot 1">
-                <img src="https://via.placeholder.com/200x400.png?text=Screenshot+2" alt="Screenshot 2">
-                <img src="https://via.placeholder.com/200x400.png?text=Screenshot+3" alt="Screenshot 3">
+                ${screenshotsHTML}
             </div>
         </div>
 
