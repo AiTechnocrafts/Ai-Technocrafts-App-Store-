@@ -173,3 +173,113 @@ footer {
         margin-bottom: 10px;
     }
 }
+
+/* --- App Detail Page Styles --- */
+
+.back-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.app-detail-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.app-detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.app-detail-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    margin-right: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.app-detail-title-group h1 {
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.app-detail-title-group p {
+    font-size: 1.1em;
+    color: #008080; /* Your theme color */
+    font-weight: 500;
+}
+
+.app-detail-title-group span {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.app-detail-actions {
+    margin-bottom: 30px;
+}
+
+.download-button {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background-color: #2ecc71; /* Green color for download */
+    color: #fff;
+    padding: 15px 0;
+    border-radius: 12px;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.download-button:hover {
+    background-color: #27ae60;
+}
+
+.no-download {
+    color: #e74c3c;
+    text-align: center;
+    font-weight: 500;
+}
+
+.screenshots-gallery {
+    margin-bottom: 30px;
+}
+
+.screenshots-gallery h2, .app-description h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.gallery {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    padding-bottom: 10px;
+}
+
+.gallery img {
+    height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.app-description p {
+    line-height: 1.6;
+    color: #555;
+    white-space: pre-wrap; /* Preserves line breaks from your description */
+}
+
+.error-text {
+    color: #e74c3c;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 40px 0;
+}
