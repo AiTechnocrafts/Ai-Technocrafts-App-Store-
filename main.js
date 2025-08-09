@@ -1,27 +1,31 @@
-// Wait for the DOM to be fully loaded before running the script
+// --- Step 1: Import necessary functions from Firebase and our config ---
+
+// Import the 'initializeApp' function from the Firebase app SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+// Import Firestore functions from the Firestore SDK
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+// Import our Firebase config from the local file
+import { firebaseConfig } from './firebase-config.js';
+
+
+// --- Step 2: Initialize Firebase and Firestore ---
+
+// Initialize Firebase with our config. This is the app instance.
+const app = initializeApp(firebaseConfig);
+// Get a reference to the Firestore database service
+const db = getFirestore(app);
+
+
+// --- Step 3: Wait for the DOM to be ready ---
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Firebase Initialization ---
-    // Check if firebase is initialized to avoid errors
-    if (typeof firebase === 'undefined' || !firebase.apps.length) {
-        console.error("Firebase is not initialized. Check your config and script tags.");
-        return;
-    }
-    // Initialize Firebase using the config object
-    firebase.initializeApp(firebaseConfig);
-    // Get a reference to the Firestore database service
-    const db = firebase.firestore();
-
     // --- DOM Element References ---
-    // Get the containers where we will display the apps
     const featuredAppsGrid = document.getElementById('featured-apps');
     const allAppsGrid = document.getElementById('all-apps');
 
     // --- Function to Create an App Card HTML ---
-    // This function takes an app object and returns the HTML for its card
+    // This function remains the same as before
     function createAppCard(app) {
-        // 'app.id' is the unique document ID from Firestore
-        // We'll use this to link to the detail page
         return `
             <a href="app.html?id=${app.id}" class="app-card">
                 <div class="app-card-content">
@@ -35,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // --- Function to Fetch and Display Apps ---
+    // --- Function to Fetch and Display Apps (Updated for Modular SDK) ---
     async function fetchAndDisplayApps() {
         try {
-            // Get all documents from the "apps" collection
-            const snapshot = await db.collection('apps').orderBy('createdAt', 'desc').get();
+            // Create a query to get apps from the "apps" collection, ordered by creation time
+            const appsQuery = query(collection(db, "apps"), orderBy("createdAt", "desc"));
+            // Execute the query
+            const snapshot = await getDocs(appsQuery);
             
             // Clear the loading message
             featuredAppsGrid.innerHTML = '';
@@ -53,14 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Loop through each app document
             snapshot.forEach(doc => {
                 const app = {
-                    id: doc.id,       // The unique ID of the document
-                    data: doc.data()  // The actual data (name, category, etc.)
+                    id: doc.id,
+                    data: doc.data()
                 };
 
-                // Create the HTML for the app card
                 const cardHTML = createAppCard(app);
 
-                // Check if the app is featured and add it to the correct section
                 if (app.data.isFeatured) {
                     featuredAppsGrid.innerHTML += cardHTML;
                 }
@@ -69,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("Error fetching apps: ", error);
-            allAppsGrid.innerHTML = '<p>Could not load apps. Please try again later.</p>';
+            // This will show the error in the browser console, which is very helpful
+            allAppsGrid.innerHTML = `<p>Error: ${error.message}. Check the console for more details.</p>`;
         }
     }
 
     // --- Initial Call ---
-    // Call the function to load apps when the page loads
     fetchAndDisplayApps();
 });
