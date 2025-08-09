@@ -23,16 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const featuredAppsGrid = document.getElementById('featured-apps');
     const allAppsGrid = document.getElementById('all-apps');
 
-    // --- Function to Create an App Card HTML ---
-    // This function remains the same as before
+        // --- Function to Create an App Card HTML ---
     function createAppCard(app) {
+        // Hum check karenge ki category hai ya nahi. Agar nahi hai, to khaali chhod denge.
+        const categoryHTML = app.data.category ? `<p>${app.data.category}</p>` : '';
+
         return `
             <a href="app.html?id=${app.id}" class="app-card">
                 <div class="app-card-content">
                     <img src="${app.data.iconUrl}" alt="${app.data.name} Icon" class="app-card-icon">
                     <div class="app-card-info">
                         <h3>${app.data.name}</h3>
-                        <p>${app.data.category}</p>
+                        ${categoryHTML}  
                     </div>
                 </div>
             </a>
@@ -81,3 +83,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Call ---
     fetchAndDisplayApps();
 });
+
