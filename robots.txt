@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aitechnocrafts2.github.io/Ai-Technocrafts-App-Store-/sitemap.xml
