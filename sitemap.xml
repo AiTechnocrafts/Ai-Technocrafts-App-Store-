@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>https://aitechnocrafts2.github.io/Ai-Technocrafts-App-Store-/</loc>
+        <lastmod>2024-08-14</lastmod> <!-- Jis din change karein, woh date daalein -->
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- Har ek app ke liye ek entry add karein -->
+    <!-- EXAMPLE: -->
+    <!--
+    <url>
+        <loc>https://aitechnocrafts2.github.io/Ai-Technocrafts-App-Store-/app.html?id=YOUR_APP_ID_HERE</loc>
+        <lastmod>2024-08-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    -->
+</urlset>
