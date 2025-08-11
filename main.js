@@ -83,4 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Call ---
     fetchAndDisplayApps();
 });
+// --- Splash Screen Logic ---
+window.addEventListener('load', () => {
+    const splash = document.getElementById('splash-screen');
+    // 2.5 seconds ke baad splash screen ko hide karo
+    setTimeout(() => {
+        splash.classList.add('splash-hidden');
+    }, 2500); // 2500 milliseconds = 2.5 seconds
+});
 
